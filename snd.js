@@ -16,7 +16,7 @@
     
     else if (myGenre.length >= 1){
       SC.initialize({
-        client_id: '762b8d030947ba97c00769ffb6c5e61e'
+        client_id: 'client_id_goes_here'
       });
       
       SC.get(
