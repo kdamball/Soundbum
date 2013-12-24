@@ -57,7 +57,6 @@
             history.pushState(hist, tracks[random].title, ""); 
             
           }
-          window.time = tracks[random].duration + 10000;
         }
       );
     }
