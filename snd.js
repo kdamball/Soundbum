@@ -1,6 +1,6 @@
 (function(){
-  $('form').on('submit', function(){
-  
+  $('form').on('submit', function(e){
+    e.preventDefault();
     var myGenre = $('#genre').val();
     //for errors
     function remove(message){
@@ -26,38 +26,53 @@
         { genres: myGenre, bpm: { from: 120 } },
         
         function(tracks, error) {
-          var random = Math.floor(Math.random() * tracks.length);
+          
+          
           if (error){
             remove("Sorry, couldn't find any songs under " +myGenre);
             document.title = "No Song Found";
             return;
           }else{
-            remove();
-            document.title = tracks[random].genre + " : " + tracks[random].title ;
-            var track_url = tracks[random].permalink_url;
-            
-            SC.oEmbed(
-              track_url, 
-              {
-                auto_play: true, 
-                color: "#ff0066", 
-                show_comments: false, 
-                download:true,
-                show_artwork:true
-              },
-              $("#target")[0]
-            );
-            
-            if(tracks[random].description){
-              $('#info').empty().append("Song Description: " +tracks[random].description);
+            function playMusic(){
+              var random = Math.floor(Math.random() * tracks.length);
+              remove();
+              document.title = tracks[random].genre + " : " + tracks[random].title ;
+              var track_url = tracks[random].permalink_url;
+              SC.oEmbed(
+                track_url, 
+                {
+                  auto_play: true, 
+                  color: "#ff0066", 
+                  show_comments: false, 
+                  download:true,
+                  show_artwork:true
+                },
+                $("#target")[0]
+              );
+              
+              
+              $('iframe').attr('sandbox', 'allow-same-origin');
+              function widgetSetup(){
+                var iframe = $('iframe')[0], widget = SC.Widget(iframe);
+                widget.bind(SC.Widget.Events.READY, function(){
+                  widget.bind(SC.Widget.Events.FINISH, function(){
+                    playMusic();
+                  });
+                });
+              };
+              
+              
+              setTimeout(widgetSetup, 2000);
+              
+              if(tracks[random].description){
+                $('#info').empty().append("Song Description: " +tracks[random].description);
+              }
             }
-
-            //just for the sake of it (future feature??)
-            var hist = {foo: SC.oEmbed(track_url, {auto_play: true, color: "#ff0066"})};
-            history.pushState(hist, tracks[random].title, ""); 
-            
+          
+            playMusic();
+   
           }
-          window.time = tracks[random].duration + 10000;
+          
         }
       );
     }
