@@ -6,14 +6,14 @@
   
 	<link rel="stylesheet" type="text/css" href="http://reset5.googlecode.com/hg/reset.min.css">
 	
-	<link rel="stylesheet" type="text/css" href='snd.css'>
+	<link rel="stylesheet" type="text/css" href='/css/snd.css'>
 </head>
 
 <body>
-	<form action="#">
+	<form action="">
     <label>Enter a Genre: </label>
     <input id='genre'>
-    <input type='submit' value='Listen'>
+    <input id='button' type='submit' value='Listen'>
   </form>
   
 	<div id="target">
@@ -25,9 +25,13 @@
 			</p>
 		</noscript>
 	</div>
+  <div id="info">
+    
+  </div>
   <script src = "http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript" src="http://connect.soundcloud.com/sdk.js"></script>
-  <script type="text/javascript" src="snd.js"></script>
+  <script src="https://w.soundcloud.com/player/api.js"></script>
+  <script type="text/javascript" src="/js/snd.js"></script>
 	
 
 </body>
