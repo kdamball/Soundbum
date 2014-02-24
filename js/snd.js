@@ -12,12 +12,8 @@ var Snd = (function(){
   };
   
   var display = function(){
-  
+
     
-    
-    SC.initialize({
-      client_id: '762b8d030947ba97c00769ffb6c5e61e'
-    });
     var playMusic = function (tracks){
       var random = Math.floor(Math.random() * tracks.length);
       self.remove();
@@ -52,7 +48,11 @@ var Snd = (function(){
       if(tracks[random].description){
         $('#info').empty().append("Song Description: " +tracks[random].description);
       }
-    }
+    };
+    
+    SC.initialize({
+      client_id: '762b8d030947ba97c00769ffb6c5e61e'
+    });
     
     SC.get(
         '/tracks', 
@@ -76,7 +76,6 @@ var Snd = (function(){
     play(): display
   }
 });
-
 
 
 (function(){
