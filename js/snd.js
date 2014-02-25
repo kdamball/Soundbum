@@ -3,7 +3,6 @@
 var Snd = (function(myGenre){
   
   self = this;
-  
   var inputGenre = myGenre;
   
   var dispose = function(element){
