@@ -1,23 +1,23 @@
 "use strict";
 
-var Snd = (function(){
+var Snd = (function(myGenre){
   
   self = this;
   
-  
-  
-  var displayError = function(errorCode){
-    var errorMessages = [
-      "No song found under "+myGenre,
-      "You didn't enter any genre"
-    ];
-    var message = message.toString();
-    $('#error').append(errorMessage[errorCode])
-  };
+  var inputGenre = myGenre;
   
   var dispose = function(element){
     $(element).empty()
   }
+
+  var displayError = function(errorCode){
+    dispose("#error");
+    var errorMessages = [
+      "No song found under " +inputGenre,
+      "You didn't enter any genre"
+    ];
+    $('#error').append(errorMessage[Number(errorCode)])
+  };
   
   var widgetSetup = function(){
     var iframe = $('iframe')[0], widget = SC.Widget(iframe);
@@ -29,6 +29,7 @@ var Snd = (function(){
   };
   
   var load = function(){
+  
     SC.initialize({
       client_id: '762b8d030947ba97c00769ffb6c5e61e'
     });
@@ -36,18 +37,19 @@ var Snd = (function(){
     SC.get(
         '/tracks', 
         
-        { genres: myGenre },
+        { genres: inputGenre },
         
         function(tracks, error) {
 
           if (error){
-          
-            self.error(0);
+            
+            
+            displayError(0);
             
           }else{
             
             var random = Math.floor(Math.random() * tracks.length);
-            self.remove("#error")
+            dispose("#error")
             document.title = tracks[random].genre + " : " + tracks[random].title ;
             var track_url = tracks[random].permalink_url;
             SC.oEmbed(
@@ -76,23 +78,24 @@ var Snd = (function(){
   };
   
   return {
-    remove: dispose,
-    error: diplayError,
+    error: displayError,
     play: load
   }
   
-})();
+});
 
 
-(function(){
-  $("form").on("submit", function(){
-  
+
+  $("form").on("submit", function(e){
+    e.preventDefault();
     var myGenre = $("#genre").val();
     
-    if(myGenre == null || myGenre.length< 0){
+    var app = new Snd(myGenre);
+    
+    if(myGenre == null || myGenre.length < 0){
       app.error(1);
     }else{
       app.play();
     }
   });
-})();
+
