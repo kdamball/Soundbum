@@ -1,4 +1,4 @@
-Soundcloud Javascript API on a single-page app
+Soundcloud Fav Genre App
 ==============================================
 
 - Choose a genre to play random songs from it non-stop!
