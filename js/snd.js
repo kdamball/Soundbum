@@ -16,14 +16,15 @@ var Snd = (function(myGenre){
       "No song found under " +inputGenre,
       "You didn't enter any genre"
     ];
-    $('#error').append(errorMessage[Number(errorCode)])
+    $('#error').append(errorMessages[Number(errorCode)]);
   };
   
   var widgetSetup = function(){
+    $('iframe').attr('sandbox', 'allow-same-origin allow-scripts');
     var iframe = $('iframe')[0], widget = SC.Widget(iframe);
     widget.bind(SC.Widget.Events.READY, function(){
       widget.bind(SC.Widget.Events.FINISH, function(){
-        self.play()
+        load()
       });
     });
   };
@@ -68,8 +69,6 @@ var Snd = (function(myGenre){
               $('#info').empty().append("Song Description: " +tracks[random].description);
             }
             
-            $('iframe').attr('sandbox', 'allow-same-origin');
-            
             setTimeout(widgetSetup, 2000);
             
           }
@@ -88,11 +87,11 @@ var Snd = (function(myGenre){
 
 $("form").on("submit", function(e){
   e.preventDefault();
-  var myGenre = $("#genre").val();
+  var myGenre = $("#genre").val().trim();
   
   var app = new Snd(myGenre);
   
-  if(myGenre == null || myGenre.length < 0){
+  if(myGenre == null || myGenre.length !==0){
     app.error(1);
   }else{
     app.play();
