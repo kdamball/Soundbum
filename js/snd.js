@@ -39,20 +39,19 @@ var Snd = (function(myGenre){
         '/tracks', 
         
         { genres: inputGenre },
-        
+
         function(tracks, error) {
 
           if (error){
-            
-            
             displayError(0);
-            
           }else{
             
             var random = Math.floor(Math.random() * tracks.length);
-            dispose("#error")
+            dispose("#error");
+            dispose("#info");
             document.title = tracks[random].genre + " : " + tracks[random].title ;
             var track_url = tracks[random].permalink_url;
+            
             SC.oEmbed(
               track_url, 
               {
