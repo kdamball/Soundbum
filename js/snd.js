@@ -2,12 +2,23 @@
 
 var Snd = (function(){
   
-  var myGenre = $("#genre").val();
+  var errorMessages = [
+    "No song found under "+myGenre,
+    "You didn't enter any genre"
+  ];
   
   var displayError = function(message){
     var message = message.toString();
-    $('form').append('<span style="color:red"><br>' +message+'</span>')
+    $('form').append(error)
+  };
+  
+  var dispose = function(element){
+    $(element).empty()
   }
+  
+  var load = function(){
+    
+  };
   
   return {
     remove: dispose,
@@ -15,4 +26,8 @@ var Snd = (function(){
     play: load
   }
   
+})();
+
+(function(){
+  $("form").on("submit", app.getSong)
 })();

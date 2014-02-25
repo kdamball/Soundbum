@@ -20,3 +20,7 @@ noscript p{
 form{
 	padding:20px;
 }
+
+#error{
+	color:red;
+}
