@@ -86,16 +86,16 @@ var Snd = (function(myGenre){
 
 
 
-  $("form").on("submit", function(e){
-    e.preventDefault();
-    var myGenre = $("#genre").val();
-    
-    var app = new Snd(myGenre);
-    
-    if(myGenre == null || myGenre.length < 0){
-      app.error(1);
-    }else{
-      app.play();
-    }
-  });
+$("form").on("submit", function(e){
+  e.preventDefault();
+  var myGenre = $("#genre").val();
+  
+  var app = new Snd(myGenre);
+  
+  if(myGenre == null || myGenre.length < 0){
+    app.error(1);
+  }else{
+    app.play();
+  }
+});
 
