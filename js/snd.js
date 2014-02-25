@@ -3,10 +3,7 @@
 var Snd = (function(myGenre){
   
   self = this;
-<<<<<<< HEAD
-  
-=======
->>>>>>> cleanup
+
   var inputGenre = myGenre;
   
   var dispose = function(element){
@@ -101,4 +98,3 @@ $("form").on("submit", function(e){
     app.play();
   }
 });
-
