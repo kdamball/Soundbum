@@ -68,7 +68,7 @@ var Snd = (function(myGenre){
               $('#info').empty().append("<strong>Song Description:</strong> <br>" +tracks[random].description);
             }
             
-            setTimeout(widgetSetup, 2000);
+            setTimeout(widgetSetup, 5000);
             
           }
       });
