@@ -13,14 +13,16 @@ noscript p{
 }
 
 #target{
-	width:50%;
+	width:48%;
 	height:80%;
 	float:left;
-	padding: 20px;
+	padding: 10px;
 }
 
 #info{
-	padding:20px;
+	padding:10px;
+	width:48%;
+	float:right;
 }
 
 form{
