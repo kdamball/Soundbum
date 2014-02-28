@@ -2,7 +2,7 @@
 
 var Snd = (function(myGenre){
   
-  self = this;
+  var self = this;
 
   var inputGenre = myGenre;
   
