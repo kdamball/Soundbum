@@ -1,3 +1,7 @@
+body{
+	font-size: 1em;
+}
+
 noscript p{
 			position:absolute;
 			display: block;
