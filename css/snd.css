@@ -1,20 +1,3 @@
-body{
-	font-size: 1em;
-}
-
-noscript p{
-			position:absolute;
-			display: block;
-			text-align:center;
-			padding:50px;
-			background-color:#D8D8D8;
-			top:40%;
-			left:25%;
-			border-radius:10px;
-			webkit-box-shadow: 0 8px 6px -6px black; 
-			-moz-box-shadow: 0 8px 6px -6px black; 
-			box-shadow: 0 8px 6px -6px black; 
-}
 
 #target{
 	width:48%;
@@ -27,10 +10,11 @@ noscript p{
 	padding:1%;
 	width:48%;
 	float:right;
+	font-size: 1em;
 }
 
 form{
-	padding:20px;
+	padding:2%;
 }
 
 #error{
