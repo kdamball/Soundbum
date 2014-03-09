@@ -85,7 +85,7 @@ var Snd = (function(myGenre){
 (function(){
   $("form").on("submit", function(e){
     e.preventDefault();
-    var myGenre = $("#genre").val().trim();
+    var myGenre = $("#genre").val().trim().toLowerCase();
     
     var app = new Snd(myGenre);
     
