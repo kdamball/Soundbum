@@ -1,14 +1,14 @@
 "use strict";
 
-var Snd = (function(myGenre){
+var Snd = (function(genre){
   
   var self = this;
 
-  var inputGenre = myGenre;
+  var inputGenre = genre;
   
   var dispose = function(element){
     $(element).empty()
-  }
+  };
 
   var displayError = function(errorCode){
     dispose("#error");
@@ -66,7 +66,7 @@ var Snd = (function(myGenre){
             
             if(tracks[random].description){
               $('#info').empty().append("<strong>Song Description:</strong> <br>" +tracks[random].description);
-            }
+            };
             
             setTimeout(widgetSetup, 5000);
             
