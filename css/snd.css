@@ -1,4 +1,3 @@
-
 #target{
 	width:48%;
 	height:80%;
@@ -19,4 +18,12 @@ form{
 
 #error{
 	color:red;
+}
+@media screen and (max-width: 500px){
+	#info, #target{
+		display:block;
+		float:none;
+		width:97%;
+		padding:1%;
+	}
 }
