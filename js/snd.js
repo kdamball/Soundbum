@@ -1,5 +1,9 @@
 "use strict";
 
+function sanitizeInput(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+}
+
 var Snd = (function(genre){
   
   var self = this;
@@ -85,7 +89,7 @@ var Snd = (function(genre){
 (function(){
   $("form").on("submit", function(e){
     e.preventDefault();
-    var myGenre = $("#genre").val().trim().toLowerCase();
+    var myGenre = sanitizeInput($("#genre").val().trim().toLowerCase());
     
     var app = new Snd(myGenre);
     
