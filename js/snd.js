@@ -28,7 +28,8 @@ var Snd = (function(genre){
     var iframe = $('iframe')[0], widget = SC.Widget(iframe);
     widget.bind(SC.Widget.Events.READY, function(){
       widget.bind(SC.Widget.Events.FINISH, function(){
-        load()
+        load();
+        setVolume(20);
       });
     });
   };
