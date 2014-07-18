@@ -1,3 +1,7 @@
+body{
+	background:#FFEDED;
+}
+
 #target{
 	width:48%;
 	height:80%;
@@ -12,8 +16,26 @@
 	font-size: 1em;
 }
 
+#info, #target{
+	background: #E9ABAB;
+}
+
 form{
 	padding:2%;
+	background: #DF8282;
+}
+
+input{
+	border:none;
+	padding:1px;
+	background:#FFFFFF;
+	border-radius:5px;
+	padding:5px;
+}
+
+input[type=submit]{
+	background:#8B4F4F;
+	color:#FFF;
 }
 
 #error{
