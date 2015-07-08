@@ -43,7 +43,10 @@ snd.controller("SearchController", ["$scope", "SndFactory", function($scope, Snd
         SC.get(
         '/tracks',
         
-        { genres: genre },
+        { 
+            genres: genre,
+            limit: 100
+        },
 
         function(tracks, error) {
           
@@ -52,9 +55,9 @@ snd.controller("SearchController", ["$scope", "SndFactory", function($scope, Snd
           }else{
             $rootScope.error = "";
 
-            Snd.songs.list = tracks.slice(0,10);
-
-            console.log(tracks[0])
+            //Pick songs to show
+            var startplace = Math.floor(Math.random()*(tracks.length-10));
+            Snd.songs.list = tracks.slice(startplace, startplace+10);
 
             //force update on new search
             $rootScope.$apply()
