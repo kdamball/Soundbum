@@ -1,4 +1,4 @@
-Soundcloud Fav Genre App
+Soundcloud Fav Genre App ^(Now with AngularJS^^TM)
 ==============================================
 
 - Choose a genre to play random songs from it non-stop!
