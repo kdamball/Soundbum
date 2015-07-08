@@ -2,15 +2,32 @@ var snd = angular.module("Snd", []);
 
 snd.controller("SearchController", ["$scope", "SndFactory", function($scope, SndFactory){
     $scope.search = function(){
-        SndFactory.getSongs($scope.genre);
+        SndFactory.getSongs($scope.genre)
     }
 
-}]).controller("SongsController", ["$scope", "SndFactory", function($scope, SndFactory){
+}]).controller("SongsController", ["$scope", "SndFactory", "PlayService", function($scope, SndFactory, PlayService){
     $scope.songs = SndFactory.songs;
 
-}]).factory("ListFactory", ["$rootScope", function($rootScope){
-    return {
-        list: []
+    $scope.playSong = function(song){
+        PlayService.play(song);
+    };
+
+}]).service("PlayService", ["$rootScope", function($rootScope){
+    
+    this.play = function (song){
+        SC.oEmbed(
+          song.permalink_url, 
+          {
+            auto_play: true, 
+            color: "#ff0066", 
+            show_comments: false, 
+            download:true,
+            show_artwork:true
+          },
+          document.getElementById("player")
+        );
+
+        $rootScope.description = song.description;
     }
 
 }]).factory("SndFactory", ["$rootScope", "$q", function($rootScope, $q){
@@ -43,25 +60,6 @@ snd.controller("SearchController", ["$scope", "SndFactory", function($scope, Snd
             $rootScope.$apply()
 
             // document.title = tracks[random].genre + " : " + tracks[random].title ;
-            // var track_url = tracks[random].permalink_url;
-            
-            // SC.oEmbed(
-            //   track_url, 
-            //   {
-            //     auto_play: true, 
-            //     color: "#ff0066", 
-            //     show_comments: false, 
-            //     download:true,
-            //     show_artwork:true
-            //   },
-            //   $("#target")[0]
-            // );
-            
-            // if(tracks[random].description){
-            //   $('#info').empty().append("<strong>Song Description:</strong> <br>" +tracks[random].description);
-            // };
-            
-            // setTimeout(widgetSetup, 5000);
             
           }
       });

@@ -20,14 +20,15 @@
   </form>
   
   <div id="target">
+    <div id="player"></div>
     
-
+    <p id="description" ng-bind="description"><p>
   </div>
   <div id="info">
     <p ng-bind="error"></p>
     <div ng-controller="SongsController">
-      <ul>
-        <li ng-repeat="song in songs.list"> <img ng-src={{song.artwork_url}}>{{ song.title }}</li>
+      <ul id="songList">
+        <li ng-click="playSong(song)" ng-repeat="song in songs.list"> <img ng-src={{song.artwork_url}}><span>{{ song.title }}</span></li>
       </ul>
     </div>
   </div>
