@@ -30,7 +30,7 @@ snd.controller("SearchController", ["$scope", "SndFactory", function($scope, Snd
         $rootScope.description = song.description;
     }
 
-}]).factory("SndFactory", ["$rootScope", "$q", function($rootScope, $q){
+}]).factory("SndFactory", ["$rootScope", function($rootScope){
     SC.initialize({
       client_id: '762b8d030947ba97c00769ffb6c5e61e'
     });
