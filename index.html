@@ -11,10 +11,10 @@
 </head>
 
 <body ng-app="Snd">
-  <form action="#hello" ng-controller="SearchController">
+  <form ng-submit="search()" ng-controller="SearchController">
     <label>Enter a Genre: </label>
     <input id='genre' ng-model="genre">
-    <input id='button' type='submit' value='Listen' ng-click="search()">
+    <input id='button' type='submit' value='Listen'>
     <br>
     <span id="error"></span>
   </form>

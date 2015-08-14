@@ -58,11 +58,6 @@ snd.controller("SearchController", ["$scope", "SndFactory", function($scope, Snd
             //Pick songs to show
             var startplace = Math.floor(Math.random()*(tracks.length-10));
             Snd.songs.list = tracks.slice(startplace, startplace+10);
-
-            //force update on new search
-            $rootScope.$apply()
-
-            // document.title = tracks[random].genre + " : " + tracks[random].title ;
             
           }
       });
