@@ -1,12 +1,21 @@
 var snd = angular.module("Snd", []);
 
-snd.controller("SearchController", ["$scope", "SndFactory", function($scope, SndFactory){
+snd.controller("SearchController", ["$scope", "$rootScope", "SndFactory", function($scope, $rootScope, SndFactory){
     $scope.search = function(){
         SndFactory.getSongs($scope.genre)
+            .then(function(songs){
+                $rootScope.$emit('songsReceived', songs);
+                $rootScope.error = "";
+            }).catch(function(error){
+                $rootScope.error = "We had a problem with getting songs";
+            });
     }
 
-}]).controller("SongsController", ["$scope", "SndFactory", "PlayService", function($scope, SndFactory, PlayService){
-    $scope.songs = SndFactory.songs;
+}]).controller("SongsController", ["$scope", "$rootScope", "PlayService", function($scope, $rootScope, PlayService){
+    
+    $rootScope.$on('songsReceived', function(msg, songs){
+        $scope.songs = songs;
+    });
 
     $scope.playSong = function(song){
         PlayService.play(song);
@@ -30,40 +39,35 @@ snd.controller("SearchController", ["$scope", "SndFactory", function($scope, Snd
         $rootScope.description = song.description;
     }
 
-}]).factory("SndFactory", ["$rootScope", function($rootScope){
-
-    var Snd = {
-        songs: {}
-    };
+}]).factory("SndFactory", ["$q", function($q){
 
     SC.initialize({
       client_id: '762b8d030947ba97c00769ffb6c5e61e'
     });
 
+    var Snd = {};
+
     Snd.getSongs = function(genre){
-        SC.get(
-        '/tracks',
-        
-        { 
-            genres: genre,
-            limit: 100
-        },
+        return $q(function(res, rej){
+            SC.get(
+                '/tracks',
 
-        function(tracks, error) {
-          
-          if (error || tracks.length === 0){
-            $rootScope.error = "We had a problem with getting songs";
-          }else{
-            $rootScope.error = "";
+                { 
+                  genres: genre,
+                  limit: 100
+                },
 
-            //Pick songs to show
-            var startplace = Math.floor(Math.random()*(tracks.length-10));
-            Snd.songs.list = tracks.slice(startplace, startplace+10);
+                function(tracks, error) {
 
-            $rootScope.$apply();
-            
-          }
-      });
+                    if (error || tracks.length === 0){
+                        rej(error);
+                    }else{
+                        
+                        var startplace = Math.floor(Math.random()*(tracks.length-10));
+                        res(tracks.slice(startplace, startplace+10))
+                    }
+            });
+        });
     }
 
     return Snd;
