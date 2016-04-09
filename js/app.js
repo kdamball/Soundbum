@@ -4,16 +4,16 @@ snd.controller("SearchController", ["$scope", "$rootScope", "SndFactory", functi
     $scope.search = function(){
         SndFactory.getSongs($scope.genre)
             .then(function(songs){
-                $rootScope.$emit('songsReceived', songs);
+                SndFactory.sndScope.$emit('songsReceived', songs);
                 $rootScope.error = "";
             }).catch(function(error){
                 $rootScope.error = "We had a problem with getting songs";
             });
     }
 
-}]).controller("SongsController", ["$scope", "$rootScope", "PlayService", function($scope, $rootScope, PlayService){
+}]).controller("SongsController", ["$scope", "SndFactory", "PlayService", function($scope, SndFactory, PlayService){
     
-    $rootScope.$on('songsReceived', function(msg, songs){
+    SndFactory.sndScope.$on('songsReceived', function(msg, songs){
         $scope.songs = songs;
     });
 
@@ -39,13 +39,15 @@ snd.controller("SearchController", ["$scope", "$rootScope", "SndFactory", functi
         $rootScope.description = song.description;
     }
 
-}]).factory("SndFactory", ["$q", function($q){
+}]).factory("SndFactory", ["$q", "$rootScope", function($q, $rootScope){
 
     SC.initialize({
       client_id: '762b8d030947ba97c00769ffb6c5e61e'
     });
 
-    var Snd = {};
+    var Snd = {
+        sndScope: $rootScope.$new()
+    };
 
     Snd.getSongs = function(genre){
         return $q(function(res, rej){
