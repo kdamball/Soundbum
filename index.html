@@ -28,6 +28,7 @@
     <p ng-bind="error"></p>
     <div ng-controller="SongsController">
       <ul id="songList">
+        <li ng-show="songs.length">Click on a song below to play it</li>
         <li ng-click="playSong(song)" ng-repeat="song in songs"> <img ng-src={{song.artwork_url}}><span>{{ song.title }}</span></li>
       </ul>
     </div>
